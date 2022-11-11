@@ -9,7 +9,17 @@
 static std::unique_ptr<rtc::Thread> signaling_thread_;
 static rtc::scoped_refptr<webrtc::PeerConnectionFactoryInterface> peer_connection_factory_;
 
-wrdSession::wrdSession(bool is_master) : is_master_(is_master) {
+wrdSession::wrdSession(bool is_master) : is_master_(is_master)
+	, sdp_gen_callback_(nullptr)
+	, sdp_gen_callback_usr_(nullptr)
+	, candidate_gathering_callback_(nullptr)
+	, candidate_gathering_callback_usr_(nullptr)
+	, remote_image_received_callback_(nullptr)
+	, remote_image_received_callback_usr_(nullptr)
+	, remote_raw_data_received_callback_(nullptr)
+	, remote_raw_data_received_callback_usr_(nullptr)
+	, remote_string_received_callback_(nullptr)
+	, remote_string_received_callback_usr_(nullptr) {
 	if (!signaling_thread_.get()) {
 		signaling_thread_ = rtc::Thread::CreateWithSocketServer();
 		signaling_thread_->Start();
@@ -94,6 +104,13 @@ wrdSession::wrdSession(bool is_master) : is_master_(is_master) {
 }
 
 wrdSession::~wrdSession() {
+	sdp_gen_callback_ = nullptr;
+	candidate_gathering_callback_ = nullptr;
+	remote_image_received_callback_ = nullptr;
+	remote_raw_data_received_callback_ = nullptr;
+	remote_string_received_callback_ = nullptr;
+	std::this_thread::yield();
+
 	if (peer_connection_.get()) {
 		peer_connection_->Close();
 		peer_connection_.release();
