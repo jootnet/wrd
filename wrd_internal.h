@@ -35,7 +35,10 @@ public:
 	void SendString(const std::string&) const;
 private:
 	bool is_master_;
+	std::unique_ptr<rtc::Thread> signaling_thread_;
 	rtc::scoped_refptr<webrtc::PeerConnectionInterface> peer_connection_;
+	rtc::scoped_refptr<webrtc::PeerConnectionFactoryInterface>
+		peer_connection_factory_;
 	rtc::scoped_refptr<webrtc::DataChannelInterface> data_channel_;
 
 	friend class wrdPeerConnectionObserver;

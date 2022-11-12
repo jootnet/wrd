@@ -6,9 +6,6 @@
 #include "api/video_codecs/builtin_video_decoder_factory.h"
 #include "api/video_codecs/builtin_video_encoder_factory.h"
 
-static std::unique_ptr<rtc::Thread> signaling_thread_;
-static rtc::scoped_refptr<webrtc::PeerConnectionFactoryInterface> peer_connection_factory_;
-
 wrdSession::wrdSession(bool is_master) : is_master_(is_master)
 	, sdp_gen_callback_(nullptr)
 	, sdp_gen_callback_usr_(nullptr)
@@ -111,10 +108,10 @@ wrdSession::~wrdSession() {
 	remote_string_received_callback_ = nullptr;
 	std::this_thread::yield();
 
-	if (peer_connection_.get()) {
-		peer_connection_->Close();
-		peer_connection_.release();
-	}
+	desktop_capture_ = nullptr;
+	peer_connection_factory_ = nullptr;
+	peer_connection_ = nullptr;
+	create_session_description_observer_ = nullptr;
 
 	if (nullptr != peer_connection_observer_) {
 		delete peer_connection_observer_;
@@ -123,12 +120,6 @@ wrdSession::~wrdSession() {
 	if (nullptr != data_channel_observer_) {
 		delete data_channel_observer_;
 		data_channel_observer_ = nullptr;
-	}
-	if (create_session_description_observer_.get()) {
-		create_session_description_observer_.release();
-	}
-	if (desktop_capture_.get()) {
-		desktop_capture_.release();
 	}
 	if (nullptr != remote_video_renderer_) {
 		delete remote_video_renderer_;
