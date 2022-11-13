@@ -58,18 +58,4 @@ extern "C" EXPORT_DEC void __cdecl wrdSendRawData(WRDClient client, const unsign
 extern "C" EXPORT_DEC void __cdecl wrdSendString(WRDClient client, const char* data);
 
 extern "C" EXPORT_DEC void __cdecl wrdClientDestroy(WRDClient * client);
-
-typedef struct _tagWebsocketClient* WebsocketClient;
-
-typedef void(__cdecl* WebsocketClientStateCallback)(const WebsocketClient client, bool, void* usr_param);
-typedef void(__cdecl* WebsocketClientRecvCallback)(const WebsocketClient client, const char*, size_t, void* usr_param);
-
-extern "C" EXPORT_DEC WebsocketClient __cdecl WebsocketClientCreate(const char* url);
-extern "C" EXPORT_DEC void __cdecl WebsocketClientOnStateChanged(WebsocketClient client, WebsocketClientStateCallback state_cb, void* usr_param);
-extern "C" EXPORT_DEC void __cdecl WebsocketClientOnRecvChanged(WebsocketClient client, WebsocketClientRecvCallback recv_cb, void* usr_param);
-extern "C" EXPORT_DEC void __cdecl WebsocketClientStart(WebsocketClient client);
-extern "C" EXPORT_DEC bool __cdecl WebsocketClientIsConnect(WebsocketClient client);
-extern "C" EXPORT_DEC void __cdecl WebsocketClientSend(WebsocketClient client, const char* data);
-
-extern "C" EXPORT_DEC void __cdecl WebsocketClientCreateDestroy(WebsocketClient * client);
 #endif//WRD_H

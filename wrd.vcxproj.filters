@@ -21,27 +21,12 @@
     <ClInclude Include="wrd_internal.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="mongoose.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="ws_client.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="wrd.cc">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="wrd_internal.cc">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="mongoose.c">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="ws_client.cc">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="ws_client_glue.cc">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

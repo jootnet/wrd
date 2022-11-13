@@ -136,17 +136,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="mongoose.h" />
     <ClInclude Include="wrd.h" />
     <ClInclude Include="wrd_internal.h" />
-    <ClInclude Include="ws_client.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="mongoose.c" />
     <ClCompile Include="wrd.cc" />
     <ClCompile Include="wrd_internal.cc" />
-    <ClCompile Include="ws_client.cc" />
-    <ClCompile Include="ws_client_glue.cc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
