@@ -206,7 +206,8 @@ void wrdDataChannelObserver::OnMessage(const webrtc::DataBuffer& buffer) {
 		ses_->remote_raw_data_received_callback_((WRDClient)ses_, buffer.data.data(), buffer.data.size(), ses_->remote_raw_data_received_callback_usr_);
 	}
 	if (!buffer.binary && nullptr != ses_->remote_string_received_callback_) {
-		ses_->remote_string_received_callback_((WRDClient)ses_, (const char*)buffer.data.data(), ses_->remote_string_received_callback_usr_);
+		std::string str((const char*)buffer.data.data(), buffer.data.size());
+		ses_->remote_string_received_callback_((WRDClient)ses_, str.c_str(), ses_->remote_string_received_callback_usr_);
 	}
 }
 

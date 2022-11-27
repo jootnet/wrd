@@ -79,5 +79,5 @@ void wrdSendString(WRDClient client, const char* data) {
 void wrdClientDestroy(WRDClient* client) {
 	auto session = reinterpret_cast<wrdSession**>(client);
 	delete* session;
-	session = nullptr;
+	*client = nullptr;
 }
