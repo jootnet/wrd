@@ -72,7 +72,7 @@ wrdSession::wrdSession(bool is_master) : is_master_(is_master)
 
 	data_channel_observer_ = new wrdDataChannelObserver(this);
 	if (is_master) {
-		desktop_capture_ = wrdDesktopCapture::Create(16, 0);
+		desktop_capture_ = wrdDesktopCapture::Create(25, 0);
 		if (desktop_capture_) {
 			rtc::scoped_refptr<webrtc::VideoTrackInterface> video_track_(
 				peer_connection_factory_->CreateVideoTrack("video_label",
